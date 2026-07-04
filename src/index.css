@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply bg-navy-950 text-paper-100 font-mono antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #d4a54a;
+  color: #121b2b;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0d1420; }
+::-webkit-scrollbar-thumb { background: #3a4c68; border-radius: 6px; border: 2px solid #0d1420; }
+
+/* ---------- Film grain overlay ---------- */
+.film-grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* ---------- Vignette ---------- */
+.vignette::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(3,6,12,0.55) 100%);
+}
+
+/* ---------- Paper texture card ---------- */
+.paper-surface {
+  background-color: #f3ecd9;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(180,140,80,0.10), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(120,90,50,0.12), transparent 45%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.06'/%3E%3C/svg%3E");
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35), 0 12px 24px -8px rgba(0,0,0,0.45);
+}
+
+/* ---------- Starfield background ---------- */
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(60,80,110,0.35), transparent 55%),
+    radial-gradient(ellipse at 80% 70%, rgba(40,55,80,0.35), transparent 55%),
+    linear-gradient(180deg, #0d1420 0%, #121b2b 55%, #182338 100%);
+}
+
+.star {
+  position: absolute;
+  background: #f3ecd9;
+  border-radius: 999px;
+}
+
+/* ---------- Handwritten annotation ---------- */
+.hand-note {
+  font-family: 'Caveat', cursive;
+  color: #d4a54a;
+}
+
+/* ---------- Tape strip ---------- */
+.tape {
+  position: absolute;
+  width: 70px;
+  height: 24px;
+  background: rgba(232, 224, 190, 0.55);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+  transform: rotate(-4deg);
+}
+
+/* Focus visibility */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid #e8c477;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
